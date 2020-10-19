@@ -1,4 +1,3 @@
 # BMEnotes
-Cs.Marci
-Panka
-semmi 
+
+# Facsiga
