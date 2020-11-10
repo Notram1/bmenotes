@@ -3,6 +3,7 @@
 	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"> 
     <head>
         <title>Spring Security Example </title>
+        <link rel='stylesheet' type='text/CSS' href='mainCSS.css'>
     </head>
     <body>
         <div>
@@ -21,6 +22,14 @@
 				<button>Sign in</button>
 			</p>
         </form>
+        <div>
+        	<p><a href="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTRF1P0aNdWTWw-WWxUT3gCaSyRaLNyj0JLkQ&usqp=CAU">Forgot your password? </a>
+        	</p>
+        </div>
+        <div>
+        	<p><a href="/add-user">Register</a>
+        	</p>
+        </div>
          <div th:if="${param.error}">
             Invalid username and password.
         </div>
