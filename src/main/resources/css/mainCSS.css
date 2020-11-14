@@ -1,5 +1,5 @@
 body {
-   	background-image: url("hatter.jpg");
+   	background-image: url("../images/hatter.jpg");
 	text-align:center;
 	color:white;
 }
@@ -31,7 +31,7 @@ body {
 	margin-top:500px;
 }
 #form{
-	background-image:url("hatter.jpg");
+	background-image:url("../images/hatter.jpg");
 	display:none;
 	position:fixed;
 	margin: auto 35vw;

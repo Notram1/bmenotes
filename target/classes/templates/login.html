@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
 	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"> 
     <head>
-        <title>Spring Security Example </title>
-        <link rel='stylesheet' type='text/CSS' href='mainCSS.css'>
+        <title>BMEnotes Log in </title>
+        <link rel="stylesheet" type = "text/css" href="../../webapp/css/mainCSS.css">
     </head>
     <body>
         <div>
@@ -11,11 +11,11 @@
 		</div>
         
         <form th:action="@{/login}" method="post">
-            <p><label>User Name</label>
+            <p><label>Username</label>
             	<input type="text" name="username"/>
             </p>
              <p>
-             	<label>Password </label>
+             	<label>Password</label>
             	<input type="password" name="password"/>
             </p>
             <p>
@@ -27,7 +27,7 @@
         	</p>
         </div>
         <div>
-        	<p><a href="/add-user">Register</a>
+        	<p><a href="/signup">Register now!</a>
         	</p>
         </div>
          <div th:if="${param.error}">
