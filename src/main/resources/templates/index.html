@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>BMEnotes</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  </head>
+  <body>
+    <div class="btn">
+      <span class="fas fa-bars"></span>
+    </div>
+
+<!-- SIDE MENU -->
+<nav class="sidebar">
+  <div class="text">Menu</div>
+
+  <ul>
+    <li >
+      <a class="subject-btn" href="#" >Subject 1 <span class="fas fa-caret-down first"></a>
+      <ul class="subject-list">
+        <li><a href="www.youtube.com" target="iframe">youtube</a></li>
+        <li><a href="#">Material 2</a></li>
+      </ul>
+    </li>
+
+    <li>
+      <a  class="subject-btn" href="#">Subject 2<span class="fas fa-caret-down second"></span></a>
+          <ul class="subject-list">
+            <li><a href="#">Material 1</a></li>
+            <li><a href="#">Material 2</a></li>
+          </ul>
+    </li>
+    <li>
+      <a class="newsubj-btn">Add new subject</a>
+    </li>
+  </ul>
+</nav>
+
+<!-- CONTENT -->
+<div class="content">
+  <div class="header">Welcome to BMEnotes</div>
+  <iframe id='iframe'></iframe>
+  <form class="form" method="post">
+    <input type="text" name="subject name" placeholder="subject name">
+    <br><br>
+    <input type="submit" class="submit" value="create">
+  </form>
+</div>
+
+
+<script>
+//toggle menu button
+    $('.btn').click(function(){
+      $(this).toggleClass("click");
+      $('.sidebar').toggleClass("show");
+    });
+//subject button
+    $('.subject-btn').click(function(){
+      $(this).siblings(".subject-list").toggleClass("show");
+      $(this).children(".fas").toggleClass("rotate");
+    });
+//active subject button toggle
+    $('nav ul li').click(function(){
+      $(this).addClass("active").siblings().removeClass("active");
+    });
+//add subject form visible
+  $(".newsubj-btn").click(function(){
+    $(".btn").toggleClass("click");
+    $('.sidebar').toggleClass("show");
+    $(".header").hide();
+    $(".form").show();
+  });
+
+//activate iframe
+  $('nav ul ul li').click(function(){
+    $(this).addClass("active").siblings().removeClass("active");
+    $(".header").hide();
+    $("#iframe").show();
+  });
+    </script>
+
+  </body>
+</html>
