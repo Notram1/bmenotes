@@ -2,39 +2,42 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
 	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"> 
     <head>
+    	<meta charset="UTF-8">
         <title>Spring Security Example </title>
-        <link rel='stylesheet' type='text/CSS' href='mainCSS.css'>
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type='text/CSS' href="../css/login.css" media="screen, projection"/>
+
     </head>
     <body>
-        <div>
-  			<h2>Input Form</h2>
-		</div>
-        
-        <form th:action="@{/login}" method="post">
-            <p><label>User Name</label>
-            	<input type="text" name="username"/>
-            </p>
-             <p>
-             	<label>Password </label>
-            	<input type="password" name="password"/>
-            </p>
-            <p>
-				<button>Sign in</button>
-			</p>
-        </form>
-        <div>
-        	<p><a href="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTRF1P0aNdWTWw-WWxUT3gCaSyRaLNyj0JLkQ&usqp=CAU">Forgot your password? </a>
-        	</p>
-        </div>
-        <div>
-        	<p><a href="/add-user">Register</a>
-        	</p>
-        </div>
-         <div th:if="${param.error}">
-            Invalid username and password.
-        </div>
-        <div th:if="${param.logout}">
-            You have been successfully logged out.
-        </div>
+        	<div class="register">
+        		<img src="../images/villany.png" width="80%" height="110%">
+        		<h2>Sign in</h2>
+        		<form th:action="@{/login}" method="post"  class="form">
+            		<div>
+            		<input type="text" class="textbox" placeholder="Username" name="username"/>
+            		</div>
+             		<div>
+            			<input type="password"  class="textbox" placeholder="••••••••••••" name="password"/>
+            		</div>
+            		<div >
+						<input type="submit" class="gomb" value="Sign in">
+					</div>
+        		</form>
+        		<div>
+        			<p><a href="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTRF1P0aNdWTWw-WWxUT3gCaSyRaLNyj0JLkQ&usqp=CAU">Forgot your password? </a>
+        			</p>
+        		</div>
+        		<div>
+        			<p><a href="/add-user">Register now</a>
+        			</p>
+        		</div>
+         		<div th:if="${param.error}">
+            		Invalid username and password.
+        		</div>
+        		<div th:if="${param.logout}">
+            		You have been successfully logged out.
+        		</div>
+        	</div>
     </body>
 </html>
