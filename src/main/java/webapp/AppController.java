@@ -46,5 +46,10 @@ public class AppController {
         //model.addAttribute("users", userRepository.findAll());       
         return "login";
     }
+    
+    @GetMapping("/home")
+    public String showHome() {
+    	return "index";
+    }
 
 }
