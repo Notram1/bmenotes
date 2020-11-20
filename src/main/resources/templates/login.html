@@ -6,11 +6,16 @@
         <title>BMEnotes Sign In</title>
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <link rel="stylesheet" type='text/css' href="../css/login.css" media="screen, projection"/>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/sign.js"> </script>
+		
 
     </head>
     <body>
-        	<div class="register">
+        	<div class="login">
         		<img src="../images/villany.png" width="80%" height="110%">
         		<h2>Sign in</h2>
         		<form th:action="@{/login}" method="post"  class="form">
@@ -21,15 +26,14 @@
             			<input type="password"  class="textbox" placeholder="••••••••••••" name="password"/>
             		</div>
             		<div >
-						<input type="submit" class="gomb" value="Sign in">
+						<input type="submit" class="button" value="Sign in">
 					</div>
         		</form>
         		<div>
-        			<p><a href="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTRF1P0aNdWTWw-WWxUT3gCaSyRaLNyj0JLkQ&usqp=CAU">Forgot your password?</a>
-        			</p>
+        			<button id="hidelogin" class="signin_out_btn">Don't have an account yet?</button>
         		</div>
         		<div>
-        			<p><a href="/signup">Register now!</a>
+        			<p><a href="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTRF1P0aNdWTWw-WWxUT3gCaSyRaLNyj0JLkQ&usqp=CAU">Forgot your password?</a>
         			</p>
         		</div>
          		<div th:if="${param.error}">
@@ -39,5 +43,37 @@
             		You have been successfully logged out.
         		</div>
         	</div>
+      <!-- ---------sign up here!------------------------------ -->    	
+        	<div class="signup">
+        	<img src="../images/villany.png" width="80%" height="110%">
+            <h2>Sign up here!</h2>
+            <div>
+                <div>
+                    <form action="#" th:action="@{/adduser}" th:object="${user}" method="post">
+                        <div>
+                            <div>
+                                <input type="text" name="username" class="textbox" id="username" placeholder="Name">
+                            </div>
+                            <div>
+                                <input type="password" name="password" class="textbox" id="password" placeholder="••••••••••••">
+                               
+                            </div>
+                            <div>
+                                <input type="text" name="email" class="textbox" id="email" placeholder="email@address.com">
+                                                           
+                            </div>
+                        </div>
+                        <div>
+                            <input type="submit" class="button" value="Add User">
+                        </div>    
+                    </form>
+                    <div>
+        			<button id="hidesignup" class="signin_out_btn">Already have an account?</button>
+        			</div>
+                </div>
+            </div>
+        </div>
+
+        	
     </body>
 </html>

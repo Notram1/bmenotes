@@ -1,0 +1,11 @@
+$(document).ready(function(){
+	$(".signup").hide();
+  	$("#hidelogin").click(function(){
+    	$(".login").hide();
+    	$(".signup").show();
+  	});
+	$("#hidesignup").click(function(){
+    	$(".login").show();
+    	$(".signup").hide();
+  	});
+});
