@@ -17,16 +17,65 @@
     <div class="usrbtn">
       <span class="fas fa-user" ></span>
     </div>
+
+
+<!-- USER FORM -->
     <nav class="userdata">
       <div class="text"><span class="fas fa-user"></span> User related</div>
+        <div class="usercurrentdata" id="usercurrentdata">
+          <ul>
+            <li>
+              <div class="labels">Username:</div>
+              <label  class="ut textbox lbl"> usrname</label>
+            </li>
+            <li>
+              <div class="labels">Email:</div>
+              <label  class="ut textbox lbl"> email</label>
+            </li>
+            <br>
+            <li id="edit"><a class="userbutton" > edit user </a></li>
+            <li><a class="userbutton del"> delete user </a></li>
+            <li><a class="userbutton  logout"> logout </a></li>
+          </ul>
+        </div>
 
-      <form class="" action="index.html" method="post">
+      <form id="usrform" class="usrform" action="index.html" method="post">
         <ul>
-          <li> <input type="text" name="" value=""> </li>
+          <li>
+            <div class="labels">Username:</div>
+            <input type="text" class="ut textbox" name="" value="" placeholder="currentUserName">
+          </li>
+          <li>
+            <div class="labels">Email:</div>
+            <input type="text" class="ut textbox" name="" value="" placeholder="currentEmail">
+          </li>
+          <li>
+            <div class="labels">New password:</div>
+            <input type="password" class="ut textbox" name="" value="" placeholder="****">
+          </li>
+          <li>
+            <div class="labels">New password again:</div>
+            <input type="password" class="ut textbox" name="" value="" placeholder="****">
+          </li>
+          <li>
+            <div class="labels">Current password</div>
+            <input type="password" class="ut textbox" name="" value="" placeholder="****">
+          </li>
+          <li>
+            <div class ="form-btns ut">
+              <br>
+              <input type="submit" class="subm-btn ut" value="Change">
+              <input id="cancelEdit" type="reset" class="subm-btn reset ut" value="Cancel">
+            </div>
+          </li>
         </ul>
       </form>
-
     </nav>
+
+
+
+
+
 
 
 <!-- SIDE MENU -->
@@ -42,8 +91,8 @@
         <form id="dropzoneID" class="dropzone" action="index.html" method="post">
           <input type="file" name="file" id="file" class="box_file">
           <label class="labelforfile" for="file"><strong>Drop file here, or click to add</strong></label>
-          <input type="text" name="filename" id="filename" class="textbox" placeholder="Material name">
           <div class ="form-btns">
+            <input type="text" name="filename" id="filename" class="textbox" placeholder="Material name">
             <input type="submit" class="subm-btn" value="Upload">
             <input type="reset" class="subm-btn reset" value="Delete">
           </div>
@@ -60,8 +109,8 @@
               <form id="dropzoneID" class="dropzone" action="index.html" method="post">
                 <input type="file" name="file" id="file" class="box_file">
                 <label class="labelforfile" for="file"><strong>Drop file here, or click to add</strong></label>
-                <input type="text" name="filename" id="filename" class="textbox" placeholder="Material name">
                 <div class ="form-btns">
+                  <input type="text" name="filename" id="filename" class="textbox" placeholder="Material name">
                   <input type="submit" class="subm-btn" value="Upload">
                   <input type="reset" class="subm-btn reset" value="Delete">
                 </div>
@@ -69,7 +118,12 @@
           </ul>
     </li>
     <li>
-      <a class="newsubj-btn">Add new subject</a>
+
+        <form class="" action="index.html" method="post">
+         <input type="text" name="filename" id="filename" class="textbox newsubj" placeholder="New subject">
+         <input type="submit" class="plusbutton" value="+">
+        </form>
+
     </li>
   </ul>
 </nav>
@@ -90,6 +144,7 @@
 
 <script>
 $(document).ready(function(){
+  $(".newsubj").show();
 //toggle menu button
     $('.btn').click(function(){
       $(this).toggleClass("click");
@@ -104,7 +159,15 @@ $(document).ready(function(){
     $('.subject-btn').click(function(){
       $(this).siblings(".subject-list").toggleClass("show");
       $(this).children(".fas").toggleClass("rotate");
-      $(this).parents().siblings().children(".subject-list").removeClass("show");
+      if ($(this).parents().siblings().children(".subject-list").hasClass("show"))
+      {
+        $(this).parents().siblings().children(".subject-list").removeClass("show");
+        $(this).parents().siblings().children(".subject-btn").children(".fas").toggleClass("rotate");
+      }
+
+      $label.text("Drop file here, or click to add");
+      $(".form-btns").removeClass("submit-show");
+      $label.show();
     });
 //active subject button toggle
     $('nav ul li').click(function(){
@@ -126,21 +189,38 @@ $(document).ready(function(){
     $("#iframe").show();
   });
 
+//user animation
+  $("#edit").click(function(){
+    $(".usercurrentdata").hide();
+    $(".usrform").show();
+  });
+
+  $("#cancelEdit").click(function(){
+    $(".usercurrentdata").show();
+    $(".usrform").hide();
+  });
+
+
 
 //dragNdrop
 
 var droppedFile = false;
 var $input    = $("form").find('input[type="file"]'),
     $label    = $("form").find('label'),
-    showFiles = function(files) {
+
+showFiles = function(files) {
       $(".textbox").text(files[ 0 ].name);
       $label.hide();
-      $(".textbox").show();
-    };
+      $(".from-btns").addClass("submit-show");
+};
+
+
 $(document).on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
     e.preventDefault();
     e.stopPropagation();
 });
+
+
 $('.dropzone').on('dragover', function(){
       $(this).addClass('dragover');
       console.log("drag");
@@ -164,15 +244,13 @@ $('.dropzone').on('dragover', function(){
     $(".form-btns").addClass("submit-show");
   });
 
-
-
 $(".reset").click(function(){
   $label.text("Drop file here, or click to add");
   $(".form-btns").removeClass("submit-show");
   $label.show();
-  $(".textbox").hide();
+  $(form).reset();
 });
-//TODO: submit AJAX
+
 
 
 });
