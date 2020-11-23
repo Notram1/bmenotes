@@ -33,6 +33,55 @@
 .btn.click span:before{
   content: '\f00d';
 }
+/*USRBTN*/
+.usrbtn{
+  position: absolute;
+  top: 15px;
+  right: 45px;
+  height: 45px;
+  width: 45px;
+  text-align: center;
+  background: #1b1b1b;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: right 0.4s ease;
+}
+.usrbtn span{
+  color: white;
+  font-size: 28px;
+  line-height: 45px;
+}
+.usrbtn.click{
+  right: 260px;
+}
+.usrbtn.click span:before{
+  content: '\f00d';
+}
+
+/* side menu nav */
+.userdata{
+  position: fixed;
+  width: 250px;
+  height: 100%;
+  right: -250px;
+  background: #1b1b1b;
+  transition: right 0.4s ease;
+}
+/*when show class en*/
+.userdata.show{
+  right: 0px;
+}
+/*text inside sidebar*/
+.userdata .text{
+  color: white;
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 65px;
+  text-align: center;
+  background: #1e1e1e;
+  letter-spacing: 1px;
+}
+
 /* side menu nav */
 .sidebar{
   position: fixed;
@@ -106,16 +155,22 @@ nav ul ul li{
 nav ul ul li a{
   font-size: 17px;
   color: #e6e6e6;
-  padding-left: 80px;
+  padding-left: 50px;
+  display:inline;
 }
 nav ul li.active ul li a{
   color: #e6e6e6;
   background: #1b1b1b;
   border-left-color: transparent;
 }
-nav ul ul li a:hover{
+
+nav ul ul li:hover a{
   color: cyan!important;
   background: #1e1e1e!important;
+}
+nav ul ul li:hover {
+  background: #1e1e1e!important;
+  cursor: pointer;
 }
 /*span triangle*/
 nav ul li a span{
@@ -196,4 +251,123 @@ nav ul li a span.rotate{
   border: 0;
   padding: 10px;
   background: #1b1b1b;
+}
+
+.dropzone {
+  text-align:center;
+  font-size: 12px;
+  font-style: italic;
+  width: 100%
+  height: 30px;
+  color: #999;
+  border: 0.1px dashed transparent;
+  line-height: inherit;
+  overflow: hidden;
+}
+.dropzone.dragover {
+  border: 0.1px dashed white;
+  color:transparent;
+}
+.dropzone:hover {
+  border: 0.1px dashed white;
+  cursor:pointer;
+}
+.dropzone:hover label {
+  font-size: 15px;
+  transition-duration: 0.5s;
+}
+.delbtn {
+  display:inline-block;
+  font-size: 20px;
+  font-weight: bold;
+  color: #f1f1f1;
+  float:right;
+  text-align: center;
+  padding-right: 10px;
+  padding-left: 10px;
+
+}
+.delbtn:hover {
+  color:red;
+  left:100%;
+  border:0.3px solid red;
+}
+.box_file {
+  display: none;
+}
+label{
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    cursor:pointer;
+    background: inherit;
+    border:0px;
+    color:inherit;
+}
+.form-btns{
+  display: none;
+}
+.form-btns.submit-show  {
+  display:block;
+}
+.subm-btn {
+  font-weight: bold;
+  background: inherit;
+  shadow: 0px;
+  border:0px;
+  padding: 0px;
+  display: inline;
+  float:left;
+  color:white;
+  height:42px;
+  font-size: 15px;
+  width: 50%;
+  margin:auto;
+}
+.subm-btn:hover{
+  color:cyan;
+  border:1px red;
+  cursor:pointer;
+}
+.reset {
+  float:right;
+}
+.reset:hover {
+  float:right;
+  color:red;
+  border:0.5px red;
+}
+
+.textbox{
+  text-align: center;
+  display: none;
+	width:90%;
+	margin:auto;
+	padding:5px;
+	background:#333;
+	border: 2px solid white;
+	border-radius:5px;
+	color:white;
+	transition:0.3s;
+}
+.textbox:hover{
+	border:2px solid cyan;
+	border-radius:5px;
+	-webkit-transform:scale(1.03);
+	opacity:1;
+}
+
+.textbox:focus{
+	border:2px solid cyan;
+  background: #eee;
+  color:black;
+	border-radius:5px;
+	-webkit-transform:scale(1.1);
+	opacity:1;
+}
+.labelforfile{
+  display: block;
+  min-height: 100%;
+  height: 100%;
 }
