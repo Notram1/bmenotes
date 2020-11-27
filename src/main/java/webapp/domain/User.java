@@ -1,17 +1,24 @@
 package webapp.domain;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+
 
 @Entity
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(nullable = false, updatable = false)
+	@Column(name = "uid", nullable = false, updatable = false)
 	private Long id;
 
 	@Column(nullable = false, unique = true)
@@ -23,11 +30,14 @@ public class User {
 	private String password;
 	
 	@Column(nullable = false, unique = true)
-	@NotBlank(message = "Email is mandatory")
+	@Email(message = "Email is not valid")
     private String email;
 
 	@Column(nullable = false)
 	private String role;
+	
+	@OneToMany(mappedBy="user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<Subject> subjects;
 	
 	public User() {
 	}

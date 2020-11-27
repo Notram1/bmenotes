@@ -18,12 +18,12 @@
         	<div class="login">
         		<img src="../images/villany.png" width="80%" height="110%">
         		<h2>Sign in</h2>
-        		<form th:action="@{/login}" method="post"  class="form">
+        		<form th:action="@{/login}" th:object="${user}" method="post"  class="form">
             		<div>
-            		<input type="text" class="textbox" placeholder="Username" name="username"/>
+            		<input type="text" class="textbox" placeholder="Username" th:field="*{username}"/>
             		</div>
              		<div>
-            			<input type="password"  class="textbox" placeholder="••••••••••••" name="password"/>
+            			<input type="password"  class="textbox" placeholder="••••••••••••" th:field="*{password}"/>
             		</div>
             		<div >
 						<input type="submit" class="button" value="Sign in">
@@ -52,14 +52,14 @@
                     <form action="#" th:action="@{/adduser}" th:object="${user}" method="post">
                         <div>
                             <div>
-                                <input type="text" name="username" class="textbox" id="username" placeholder="Name">
+                                <input type="text" th:field="*{username}" class="textbox" id="username" placeholder="Name">
                             </div>
                             <div>
-                                <input type="password" name="password" class="textbox" id="password" placeholder="••••••••••••">
+                                <input type="password" th:field="*{password}" class="textbox" id="password" placeholder="••••••••••••">
                                
                             </div>
                             <div>
-                                <input type="text" name="email" class="textbox" id="email" placeholder="email@address.com">
+                                <input type="text" th:field="*{email}" class="textbox" id="email" placeholder="email@address.com">
                                                            
                             </div>
                         </div>

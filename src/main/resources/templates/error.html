@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<head>
+   		 <title>Access Denied</title>
+	</head>
+	<body>
+         <div class="w3-container w3-card-4">
+           <h1> Access denied.</h1>
+           <p>You do not have permission to view this page.</p>
+           <form th:action="@{/logout}" method="post">
+                <p>
+                	<a class="w3-btn w3-blue" href="/" th:href="@{/}">Back to home page</a>
+            		<input type="submit" value="Sign Out" class="w3-btn w3-blue"/>
+            	</p>
+            	
+        	</form>
+         </div>
+
+	</body>
+</html>
