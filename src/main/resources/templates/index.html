@@ -143,6 +143,7 @@
 </div>
 
 
+
 <script>
 $(document).ready(function(){
   $(".newsubj").show();
@@ -200,8 +201,16 @@ $(document).ready(function(){
     $(".usercurrentdata").show();
     $(".usrform").hide();
   });
-
-
+  
+//footer
+  $(".footer-distributed").hide();
+  $(".footer-btn_down").hide();
+  $(".footer_btn_up").click(function(){
+  	$(".footer-distributed").show();
+  });
+  $(".footer_btn_down").click(function(){
+	$(".footer-distributed").hide();
+  });
 
 //dragNdrop
 
@@ -256,6 +265,62 @@ $(".reset").click(function(){
 
 });
     </script>
+    
+    <!-- HEADER BUTTONS-------------- -->
+	<div class="hdr">
+		<button class="header_btn">Explore courses</button>
+		<button class="header_btn">Learning buddies</button>
+		<button class="header_btn">Test your knowledge</button>
+		<button class="header_btn">Events</button>
+	</div>
 
-  </body>
+<!-- FOOTERBUTTON -->
+   <div class="footer_arrows">
+		<div class="fas fa-caret-up footer_btn_up"></div>
+    	<div><h2>More Info</h2></div>
+    	<div class="fas fa-sort-down footer_btn_down"></div>    
+	</div>
+  <!-- Site footer -->
+   <footer class="footer-distributed">
+   	<div class="footer_arrows_in">
+		<div class="fas fa-caret-up footer_btn_up"></div>
+    	<div><h2>More Info</h2></div>
+    	<div class="fas fa-sort-down footer_btn_down"></div>    
+	</div>
+			<div class="footer-left">
+				<p class="footer-links">
+					<a href="#" class="link-1">Home</a>				
+					<a href="#">About</a>					
+					<a href="#">Contact</a>
+				</p>
+				<p class="footer-company-name">BMEnotes © 2020</p>
+			</div>			
+			<div class="footer-center">
+				<div>
+					<i class="fas fa-map-marker-alt"></i>
+					<p><span>Műegyetem rkp. 9</span> Budapest 1111</p>
+				</div>
+				<div>
+					<i class="fas fa-phone"></i>
+					<p>+36 1 463 2551</p>
+				</div>
+				<!--  <div>
+					<i class="fa fa-envelope"></i>
+					<p><a href="mailto:support@company.com">supportt@bmenotes.com</a></p>
+				</div> -->
+			</div>
+			<div class="footer-right">
+				 <p class="footer-company-about">
+					<span>About us</span>
+					<!-- Push yourself because, no one else is doing it for you.-->
+				</p>
+				<div class="footer-icons">
+					<a href="https://www.facebook.com/BMEVIK/"><i class="fa fa-user-friends" ></i></a>
+					<a href="https://twitter.com/bmevik"><i class="fa fa-dove"></i></a>
+					<a href="https://www.linkedin.com/school/budapest-university-of-technology-and-economics/"><i class="fa fa-link"></i></a>
+					<a href="https://gitlab.com/mcserni/bmenotes"><i class="fa fa-cat"></i></a>
+				</div>
+			</div>
+		</footer>
+  </body>  
 </html>

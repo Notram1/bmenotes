@@ -16,9 +16,9 @@
     </head>
     <body>
         	<div class="login">
-        		<img src="../images/villany.png" width="80%" height="110%">
+        		<img src="../images/villany.png" width="80%" height="100%">
         		<h2>Sign in</h2>
-        		<form th:action="@{/login}" th:object="${user}" method="post"  class="form">
+        		<form th:action="@{/login}" th:object="${user}" method="post"  class="form" name="registration">
             		<div>
             		<input type="text" class="textbox" placeholder="Username" th:field="*{username}"/>
             		</div>
@@ -45,35 +45,53 @@
         	</div>
       <!-- ---------sign up here!------------------------------ -->    	
         	<div class="signup">
-        	<img src="../images/villany.png" width="80%" height="110%">
+        	<img src="../images/villany.png" width="80%" height="100%">
             <h2>Sign up here!</h2>
             <div>
                 <div>
-                    <form action="#" th:action="@{/adduser}" th:object="${user}" method="post">
+                    <form action="#" th:action="@{/adduser}" th:object="${user}" th:method="post" id="signup_id" >
                         <div>
                             <div>
-                                <input type="text" th:field="*{username}" class="textbox" id="username" placeholder="Name">
+                                <input type="text" th:field="*{username}" class="textbox" id="username" placeholder="Name" required>
+                                <!--<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span> -->
                             </div>
                             <div>
-                                <input type="password" th:field="*{password}" class="textbox" id="password" placeholder="••••••••••••">
-                               
+                                <input type="password" th:field="*{password}" class="textbox" id="password" placeholder="••••••••••••" minlength="3" required>
+                                <!--  <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>-->
                             </div>
                             <div>
-                                <input type="text" th:field="*{email}" class="textbox" id="email" placeholder="email@address.com">
-                                                           
+                                <input type="password" name="conf_password" class="textbox" id="conf_password" placeholder="••••••••••••" 
+                                minlength="3" onChange="isPasswordMatch();" required>
+                                
+                                <!--  <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>-->
+                            </div>
+                            <div id="divCheckPassword"></div>
+                            <div>
+                                <input type="email" th:field="*{email}" class="textbox" id="email" placeholder="email@address.com" 
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" minlength="5" required>
+                                <!--  <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>     -->                            
+                                                        
                             </div>
                         </div>
                         <div>
-                            <input type="submit" class="button" value="Add User">
+                        	<input type="checkbox" name="TandC" value="yes" id="check" class="checkbox" required>
+                        	<label>I read and agree to the <a href="#">Terms and Conditions</a></label>
+                        	<!--  <span th:if="${#fields.hasErrors('check')}" th:errors="*{check}"></span>     --> 
+                        </div>
+                        
+                        <div>
+                            <input type="submit" class="button" value="Add User" id="btSubmit" disabled>
                         </div>    
+                    </form>
+                    <form action="#">
+                        	
                     </form>
                     <div>
         			<button id="hidesignup" class="signin_out_btn">Already have an account?</button>
         			</div>
                 </div>
             </div>
-        </div>
-
-        	
+        </div>       
+	
     </body>
 </html>
