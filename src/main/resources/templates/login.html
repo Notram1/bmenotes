@@ -20,10 +20,10 @@
         		<h2>Sign in</h2>
         		<form th:action="@{/login}" th:object="${user}" method="post"  class="form" name="registration">
             		<div>
-            		<input type="text" class="textbox" placeholder="Username" name="username"/>
+            		<input type="text" class="textbox" placeholder="Username" th:field="*{username}"/>
             		</div>
              		<div>
-            			<input type="password"  class="textbox" placeholder="••••••••••••" name="password"/>
+            			<input type="password"  class="textbox" placeholder="••••••••••••" th:field="*{password}"/>
             		</div>
             		<div >
 						<input type="submit" class="button" value="Sign in">
@@ -52,11 +52,11 @@
                     <form action="#" th:action="@{/adduser}" th:object="${user}" th:method="post" id="signup_id" >
                         <div>
                             <div>
-                                <input type="text" name="username" class="textbox" id="username" placeholder="Name" required>
+                                <input type="text" th:field="*{username}" class="textbox" id="username" placeholder="Name" required>
                                 <!--<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span> -->
                             </div>
                             <div>
-                                <input type="password" name="password" class="textbox" id="password" placeholder="••••••••••••" minlength="3" required>
+                                <input type="password" th:field="*{password}" class="textbox" id="password" placeholder="••••••••••••" minlength="3" required>
                                 <!--  <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>-->
                             </div>
                             <div>
@@ -67,7 +67,7 @@
                             </div>
                             <div id="divCheckPassword"></div>
                             <div>
-                                <input type="email" name="email" class="textbox" id="email" placeholder="email@address.com" 
+                                <input type="email" th:field="*{email}" class="textbox" id="email" placeholder="email@address.com" 
                                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" minlength="5" required>
                                 <!--  <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>     -->                            
                                                         

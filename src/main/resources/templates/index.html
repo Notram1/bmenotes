@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"> 
   <head>
     <meta charset="utf-8">
     <title>BMEnotes</title>
@@ -26,16 +27,16 @@
           <ul>
             <li>
               <div class="labels">Username:</div>
-              <label  class="ut textbox lbl"> usrname</label>
+              <label  class="ut textbox lbl" th:text="${#authentication.getPrincipal().getUsername()}"> usrname </label>
             </li>
             <li>
               <div class="labels">Email:</div>
-              <label  class="ut textbox lbl"> email</label>
+              <label  class="ut textbox lbl" th:text="${user?.getEmail()}"> email </label>
             </li>
-            <br>
+           
             <li id="edit"><a class="userbutton" > edit user </a></li>
             <li><a class="userbutton del"> delete user </a></li>
-            <li><a class="userbutton  logout"> logout </a></li>
+            <li><a class="userbutton  logout" href="logout"> logout </a></li>
           </ul>
         </div>
 
@@ -86,7 +87,7 @@
     <li >
       <a class="subject-btn" href="#" >Subject 1 <span class="fas fa-caret-down"></a>
       <ul class="subject-list">
-        <li><a href="www.youtube.com" target="iframe">youtube</a> <span class="delbtn" title="delete file"> X </span></li>
+        <li><a href="www.youtube.com" target="iframe">Youtube</a> <span class="delbtn" title="delete file"> X </span></li>
         <li><a href="#">Material 2</a><span class="delbtn" title="delete file"> X </span></li>
         <form id="dropzoneID" class="dropzone" action="index.html" method="post">
           <input type="file" name="file" id="file" class="box_file">
@@ -99,9 +100,9 @@
         </form>
       </ul>
     </li>
-
-    <li>
-      <a  class="subject-btn" href="#">Subject 2<span class="fas fa-caret-down"></span></a>
+		
+    <li th:each="subject : ${subjects}" th:object="${subject}">
+      <a  class="subject-btn" href="#" th:text="*{subjectname}">Subject 2<span class="fas fa-caret-down"></span></a>
           <ul class="subject-list">
             <li><a href="#">Material 1</a><span class="delbtn" title="delete file"> X </span></li>
             <li><a href="#">Material 2</a><span class="delbtn" title="delete file"> X </span></li>
@@ -119,8 +120,8 @@
     </li>
     <li>
 
-        <form class="" action="index.html" method="post">
-         <input type="text" name="filename" id="filename" class="textbox newsubj" placeholder="New subject">
+        <form class="" th:action="@{/addsubject}" th:object="${subject}" method="post">
+         <input type="text" th:name="subjectname" id="subjectname" class="textbox newsubj" placeholder="New subject" >
          <input type="submit" class="plusbutton" value="+">
         </form>
 
@@ -133,7 +134,7 @@
   <div class="header">Welcome to BMEnotes</div>
   <iframe id='iframe'></iframe>
   <form class="form" method="post">
-    <input type="text" name="subject name" placeholder="subject name">
+    <input type="text" placeholder="subject name">
     <div id="dropzoneID" class="dropzone dz-clickable">
     </div>
     <br><br>

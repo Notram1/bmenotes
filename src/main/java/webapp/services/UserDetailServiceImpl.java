@@ -1,4 +1,4 @@
-package webapp.service;
+package webapp.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import webapp.domain.User;
-import webapp.domain.UserRepository;
+import webapp.repositories.UserRepository;
 
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {

@@ -8,8 +8,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import webapp.service.UserDetailServiceImpl;
+import webapp.services.UserDetailServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -23,17 +24,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     	//http.csrf().disable().cors();
         http
             .authorizeRequests()
-                .antMatchers("/signup","/adduser", "/js/**", "/css/**", "/images/**").permitAll()
-                .antMatchers("/home").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/login","/adduser", "/js/**", "/css/**", "/images/**").permitAll()
+                .antMatchers("/home", "/addsubject").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
                 .loginPage("/login")
                 .permitAll()
                 .and()
-            .logout()
-                .permitAll()
-        	.and()
+                .logout()
+            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))            
+                .logoutSuccessUrl("/login")
+                .invalidateHttpSession(true)        // set invalidation state when logout
+                .deleteCookies("JSESSIONID")        
+                .and()
         	.exceptionHandling().accessDeniedPage("/error");
     }
 	 
