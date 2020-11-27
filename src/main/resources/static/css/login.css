@@ -2,9 +2,9 @@ body {
   background-color:#354152;
   color:#7e8ba3;
   font: 300;
-  height: 1000px;
+  height: 80%;
   width: 450px;
-  margin-top: 5%;
+  margin-top: 1%;
   font-family: sans-serif;
   align-items: center;
   margin-left: auto;
@@ -21,7 +21,7 @@ body {
 }
 
 h2 {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 100;
   margin: 0 0 1rem;
   text-transform: uppercase;
@@ -51,6 +51,7 @@ h2 {
 	background-color: #354152;
 	border: none;
 	color:#7e8ba3;
+	font-size: 1.4rem;
 }
 
 .button{
@@ -70,19 +71,24 @@ h2 {
 	
 	border: 3px solid #242c37;
     border-radius: 999px;
-	font-size: 1rem;
+	font-size: 1.3rem;
 	background-color: #354152;
 	opacity: 1;
     text-align: center;
     background-position: 1rem 50%;
-	padding: 15px;
-	margin: 20px;
+	padding: 10px;
+	margin: 10px;
 	opacity:1;
 	width: 80%;
 	align:center;
 }
 .reg_btn:hover{
 	text-decoration:underline;
+}
+
+
+.checkbox{
+	background-color: #354152;
 }
 
 
