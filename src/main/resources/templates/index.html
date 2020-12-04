@@ -3,6 +3,9 @@
 	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"> 
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
     <title>BMEnotes</title>
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -31,11 +34,11 @@
             </li>
             <li>
               <div class="labels">Email:</div>
-              <label  class="ut textbox lbl" th:text="${user?.getEmail()}"> email </label>
+              <label  class="ut textbox lbl" th:text="${user.getEmail()}"> email </label>
             </li>
            
             <li id="edit"><a class="userbutton" > edit user </a></li>
-            <li><a class="userbutton del"> delete user </a></li>
+            <li><a class="userbutton del" onclick="delFunction()" th:href="@{/deleteuser/{id}(id=${user.id})}"> delete user </a></li>
             <li><a class="userbutton  logout" href="logout"> logout </a></li>
           </ul>
         </div>
@@ -74,48 +77,28 @@
     </nav>
 
 
-
-
-
-
-
 <!-- SIDE MENU -->
 <nav class="sidebar">
   <div class="text"><span class="fas fa-bars"> </span>Menu</div>
 
-  <ul>
-    <li >
-      <a class="subject-btn" href="#" >Subject 1 <span class="fas fa-caret-down"></a>
-      <ul class="subject-list">
-        <li><a href="www.youtube.com" target="iframe">Youtube</a> <span class="delbtn" title="delete file"> X </span></li>
-        <li><a href="#">Material 2</a><span class="delbtn" title="delete file"> X </span></li>
-        <form id="dropzoneID" class="dropzone" action="index.html" method="post">
-          <input type="file" name="file" id="file" class="box_file">
-          <label class="labelforfile" for="file"><strong>Drop file here, or click to add</strong></label>
-          <div class ="form-btns">
-            <input type="text" name="filename" id="filename" class="textbox" placeholder="Material name">
-            <input type="submit" class="subm-btn" value="Upload">
-            <input type="reset" class="subm-btn reset" value="Delete">
-          </div>
-        </form>
-      </ul>
-    </li>
-		
+  <ul>		
     <li th:each="subject : ${subjects}" th:object="${subject}">
-      <a  class="subject-btn" href="#" th:text="*{subjectname}">Subject 2<span class="fas fa-caret-down"></span></a>
+      <a  class="subject-btn" href="#" th:text="*{subjectname}">Subject 2 <span class="fas fa-caret-down"></span></a>
           <ul class="subject-list">
-            <li><a href="#">Material 1</a><span class="delbtn" title="delete file"> X </span></li>
-            <li><a href="#">Material 2</a><span class="delbtn" title="delete file"> X </span></li>
-
-              <form id="dropzoneID" class="dropzone" action="index.html" method="post">
-                <input type="file" name="file" id="file" class="box_file">
-                <label class="labelforfile" for="file"><strong>Drop file here, or click to add</strong></label>
-                <div class ="form-btns">
-                  <input type="text" name="filename" id="filename" class="textbox" placeholder="Material name">
+            <li th:each="document : ${documents}" th:if="${document.subject}==${subject}">
+            	<a th:text="${document.docname}" onClick='document.getElementById("iframe").src=`${document.file}`;'>Material 2</a>
+            	<span title="delete file"><a class="delbtn" onclick="delFunction()" th:href="@{/deletedocument/{id}(id=${document.id})}">X</a></span> 
+            </li>
+							
+              <form class="dropzone" th:action="@{/upload/db/{id}(id=${subject.id})}" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" th:id="|file${subject.id}|" class="box_file">
+                <label class="labelforfile" th:for="|file${subject.id}|"><strong>Drop file here, or click to add</strong></label>
+                <div class ="form-btns">                                 
                   <input type="submit" class="subm-btn" value="Upload">
                   <input type="reset" class="subm-btn reset" value="Delete">
                 </div>
               </form>
+            <li><a class="userbutton del" onclick="delFunction()" th:href="@{/deletesubject/{id}(id=${subject.id})}"> delete subject </a></li>
           </ul>
     </li>
     <li>
@@ -123,6 +106,9 @@
         <form class="" th:action="@{/addsubject}" th:object="${subject}" method="post">
          <input type="text" th:name="subjectname" id="subjectname" class="textbox newsubj" placeholder="New subject" >
          <input type="submit" class="plusbutton" value="+">
+         <!--HERE-->
+         <button type="button" class="clIF">Close Material window</button>
+
         </form>
 
     </li>
@@ -132,14 +118,9 @@
 <!-- CONTENT -->
 <div class="content">
   <div class="header">Welcome to BMEnotes</div>
-  <iframe id='iframe'></iframe>
-  <form class="form" method="post">
-    <input type="text" placeholder="subject name">
-    <div id="dropzoneID" class="dropzone dz-clickable">
-    </div>
-    <br><br>
-    <input type="submit" class="submit" value="create">
-  </form>
+  <div class="container">
+    <iframe src="https://research.google.com/pubs/archive/44678.pdf" class="iframe" name="iframe_a" id="iframe"> </iframe>
+  </div>
 </div>
 
 
@@ -188,7 +169,18 @@ $(document).ready(function(){
   $('nav ul ul li').click(function(){
     $(this).addClass("active").siblings().removeClass("active");
     $(".header").hide();
-    $("#iframe").show();
+    $(".iframe").show();
+    $(".container").show();
+    $(".header_btn").hide();
+  });
+
+  //close iframe
+  $('button').click(function(){
+    //$(this).addClass("active").siblings().removeClass("active");
+    $(".header").show();
+    $(".iframe").hide();
+    $(".container").hide();
+    $(".header_btn").show();
   });
 
 //user animation
@@ -216,11 +208,12 @@ $(document).ready(function(){
 
 var droppedFile = false;
 var $input    = $("form").find('input[type="file"]'),
-    $label    = $("form").find('label'),
+    $label    = $("form").find('label');
 
 showFiles = function(files) {
-      $(".textbox").text(files[ 0 ].name);
-      $label.hide();
+      $label.text(files[ 0 ].name);
+      console.log(files[ 0 ].name);
+      console.log(files[0]);
       $(".from-btns").addClass("submit-show");
 };
 
@@ -240,11 +233,9 @@ $('.dropzone').on('dragover', function(){
       console.log("dragleave");
 
    })
-   .on('drop',function(){
-     $(this).removeClass('dragover');
-     console.log("drop");
-   })
    .on('drop', function(e) {
+	 $(this).removeClass('dragover');
+	 console.log("drop");
      droppedFiles = e.originalEvent.dataTransfer.files;
      showFiles( droppedFiles );
      $(".form-btns").addClass("submit-show");
@@ -266,6 +257,18 @@ $(".reset").click(function(){
 });
     </script>
     
+    <script>
+    function delFunction() {
+    var txt;
+    if (confirm("Are you sure?")) {
+      txt = 1;
+    } else {
+      txt = 0;
+    }
+    document.getElementById("demo").innerHTML = txt;
+    }
+    </script>
+    
     <!-- HEADER BUTTONS-------------- -->
 	<div class="hdr">
 		<button class="header_btn">Explore courses</button>
@@ -274,53 +277,54 @@ $(".reset").click(function(){
 		<button class="header_btn">Events</button>
 	</div>
 
-<!-- FOOTERBUTTON -->
-   <div class="footer_arrows">
-		<div class="fas fa-caret-up footer_btn_up"></div>
-    	<div><h2>More Info</h2></div>
-    	<div class="fas fa-sort-down footer_btn_down"></div>    
-	</div>
-  <!-- Site footer -->
-   <footer class="footer-distributed">
-   	<div class="footer_arrows_in">
-		<div class="fas fa-caret-up footer_btn_up"></div>
-    	<div><h2>More Info</h2></div>
-    	<div class="fas fa-sort-down footer_btn_down"></div>    
-	</div>
-			<div class="footer-left">
-				<p class="footer-links">
-					<a href="#" class="link-1">Home</a>				
-					<a href="#">About</a>					
-					<a href="#">Contact</a>
-				</p>
-				<p class="footer-company-name">BMEnotes © 2020</p>
-			</div>			
-			<div class="footer-center">
-				<div>
-					<i class="fas fa-map-marker-alt"></i>
-					<p><span>Műegyetem rkp. 9</span> Budapest 1111</p>
-				</div>
-				<div>
-					<i class="fas fa-phone"></i>
-					<p>+36 1 463 2551</p>
-				</div>
-				<!--  <div>
-					<i class="fa fa-envelope"></i>
-					<p><a href="mailto:support@company.com">supportt@bmenotes.com</a></p>
-				</div> -->
-			</div>
-			<div class="footer-right">
-				 <p class="footer-company-about">
-					<span>About us</span>
-					<!-- Push yourself because, no one else is doing it for you.-->
-				</p>
-				<div class="footer-icons">
-					<a href="https://www.facebook.com/BMEVIK/"><i class="fa fa-user-friends" ></i></a>
-					<a href="https://twitter.com/bmevik"><i class="fa fa-dove"></i></a>
-					<a href="https://www.linkedin.com/school/budapest-university-of-technology-and-economics/"><i class="fa fa-link"></i></a>
-					<a href="https://gitlab.com/mcserni/bmenotes"><i class="fa fa-cat"></i></a>
-				</div>
-			</div>
-		</footer>
-  </body>  
+    <!-- FOOTERBUTTON -->
+    <div class="footer_arrows">
+    <div class="fas fa-caret-up footer_btn_up"></div>
+      <div><h2>More Info</h2></div>
+      <div class="fas fa-sort-down footer_btn_down"></div>
+    </div>
+    <!-- Site footer -->
+    <footer class="footer-distributed">
+    <div class="footer_arrows_in">
+    <div class="fas fa-caret-up footer_btn_up"></div>
+      <div><h2>More Info</h2></div>
+      <div class="fas fa-sort-down footer_btn_down"></div>
+    </div>
+      <div class="footer-left">
+        <p class="footer-links">
+          <a href="#" class="link-1">Home</a>
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+        </p>
+        <p class="footer-company-name">BMEnotes © 2020</p>
+      </div>
+      <div class="footer-center">
+        <div>
+          <i class="fas fa-map-marker-alt"></i>
+          <p><span>Műegyetem rkp. 9</span> Budapest 1111</p>
+        </div>
+        <div>
+          <i class="fas fa-phone"></i>
+          <p>+36 1 463 2551</p>
+        </div>
+        <!--  <div>
+          <i class="fa fa-envelope"></i>
+          <p><a href="mailto:support@company.com">supportt@bmenotes.com</a></p>
+        </div> -->
+      </div>
+      <div class="footer-right">
+         <p class="footer-company-about">
+          <span>About us</span>
+          <!-- Push yourself because, no one else is doing it for you.-->
+        </p>
+        <div class="footer-icons">
+          <a href="https://www.facebook.com/BMEVIK/"><i class="fa fa-user-friends" ></i></a>
+          <a href="https://twitter.com/bmevik"><i class="fa fa-dove"></i></a>
+          <a href="https://www.linkedin.com/school/budapest-university-of-technology-and-economics/"><i class="fa fa-link"></i></a>
+          <a href="https://gitlab.com/mcserni/bmenotes"><i class="fa fa-cat"></i></a>
+        </div>
+      </div>
+    </footer>
+
+  </body>
 </html>

@@ -17,10 +17,13 @@ public class Document {
 	@Column(name = "fid", nullable = false, updatable = false)
     private Long fid;
 	
-	@Column
+	@Column(nullable = false)
     private String docname;
 	
-	@Column 
+	@Column
+	private String type;
+	
+	@Column(nullable = false) 
     @Lob
     private byte[] file;
 	
@@ -31,9 +34,10 @@ public class Document {
 	public Document() {	
 	}
 	
-	public Document(String docname, byte[] file) {
+	public Document(String docname, String type, byte[] file) {
 		super();
 		this.docname = docname;
+		this.type = type;
 		this.file = file;
 	}
 	
@@ -52,6 +56,15 @@ public class Document {
 	public void setDocname(String docname) {
 		this.docname = docname;
 	}
+	
+	public String getType() {
+	    return type;
+	}
+	
+	public void setType(String type) {
+	    this.type = type;
+	}
+	
 	
 	public Subject getSubject() {
 		return subject;

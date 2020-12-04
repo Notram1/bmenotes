@@ -1,5 +1,8 @@
 package webapp.repositories;
 
+
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,6 +12,6 @@ import webapp.domain.User;
 @Repository
 public interface SubjectRepository extends CrudRepository<Subject, Long> {
 //	Subject findBySubjectname(String subjectname);
-	Subject findByUser(User user);
+	List<Subject> findAllByUser(User user);
 	
 }

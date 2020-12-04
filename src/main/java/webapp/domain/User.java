@@ -36,7 +36,8 @@ public class User {
 	@Column(nullable = false)
 	private String role;
 	
-	@OneToMany(mappedBy="user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	
+	@OneToMany(mappedBy="user", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private Set<Subject> subjects;
 	
 	public User() {

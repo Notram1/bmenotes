@@ -6,30 +6,35 @@
         <title>BMEnotes Sign In</title>
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <link rel="stylesheet" type='text/css' href="../css/login.css" media="screen, projection"/>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="../js/sign.js"> </script>
+		
 
     </head>
     <body>
-        	<div class="register">
-        		<img src="../images/villany.png" width="80%" height="110%">
+        	<div class="login">
+        		<img src="../images/villany.png" width="80%" height="100%">
         		<h2>Sign in</h2>
-        		<form th:action="@{/login}" method="post"  class="form">
+        		<form th:action="@{/login}" th:object="${user}" method="post"  class="form" name="registration">
             		<div>
-            		<input type="text" class="textbox" placeholder="Username" name="username"/>
+            		<input type="text" class="textbox" placeholder="Username" th:field="*{username}"/>
             		</div>
              		<div>
-            			<input type="password"  class="textbox" placeholder="••••••••••••" name="password"/>
+            			<input type="password"  class="textbox" placeholder="••••••••••••" th:field="*{password}"/>
             		</div>
             		<div >
-						<input type="submit" class="gomb" value="Sign in">
+						<input type="submit" class="button" value="Sign in">
 					</div>
         		</form>
         		<div>
-        			<p><a href="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTRF1P0aNdWTWw-WWxUT3gCaSyRaLNyj0JLkQ&usqp=CAU">Forgot your password?</a>
-        			</p>
+        			<button id="hidelogin" class="signin_out_btn">Don't have an account yet?</button>
         		</div>
         		<div>
-        			<p><a href="/signup">Register now!</a>
+        			<p><a href="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTRF1P0aNdWTWw-WWxUT3gCaSyRaLNyj0JLkQ&usqp=CAU">Forgot your password?</a>
         			</p>
         		</div>
          		<div th:if="${param.error}">
@@ -39,5 +44,55 @@
             		You have been successfully logged out.
         		</div>
         	</div>
+      <!-- ---------sign up here!------------------------------ -->    	
+        	<div class="signup">
+        	<img src="../images/villany.png" width="80%" height="100%">
+            <h2>Sign up here!</h2>
+            <div>
+                <div>
+                    <form action="#" th:action="@{/adduser}" th:object="${user}" th:method="post" id="signup_id" >
+                        <div>
+                            <div>
+                                <input type="text" th:field="*{username}" class="textbox" id="new_username" placeholder="Name" required>
+                                <!--<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span> -->
+                            </div>
+                            <div>
+                                <input type="password" th:field="*{password}" class="textbox" id="new_password" placeholder="••••••••••••" minlength="3" required>
+                                <!--  <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>-->
+                            </div>
+                            <div>
+                                <input type="password" name="conf_password" class="textbox" id="conf_password" placeholder="••••••••••••" 
+                                minlength="3" onChange="isPasswordMatch();" required>
+                                
+                                <!--  <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>-->
+                            </div>
+                            <div id="divCheckPassword"></div>
+                            <div>
+                                <input type="email" th:field="*{email}" class="textbox" id="email" placeholder="email@address.com" 
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" minlength="5" required>
+                                <!--  <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>     -->                            
+                                                        
+                            </div>
+                        </div>
+                        <div>
+                        	<input type="checkbox" name="TandC" value="yes" id="check" class="checkbox" required>
+                        	<label>I read and agree to the <a href="#">Terms and Conditions</a></label>
+                        	<!--  <span th:if="${#fields.hasErrors('check')}" th:errors="*{check}"></span>     --> 
+                        </div>
+                        
+                        <div>
+                            <input type="submit" class="button" value="Add User" id="btSubmit" disabled>
+                        </div>    
+                    </form>
+                    <form action="#">
+                        	
+                    </form>
+                    <div>
+        			<button id="hidesignup" class="signin_out_btn">Already have an account?</button>
+        			</div>
+                </div>
+            </div>
+        </div>       
+	
     </body>
 </html>
