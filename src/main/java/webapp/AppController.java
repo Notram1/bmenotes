@@ -1,9 +1,14 @@
 package webapp;
 
+import java.net.MalformedURLException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -107,19 +112,19 @@ public class AppController {
     @PostMapping("/upload/db/{id}")
     public String uploadToDB(@PathVariable("id") long id, @RequestParam("file") MultipartFile file) {
     	Subject subject = subjectRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-    	documentService.saveFile(file, subject);
-    	    	    	
+    	documentService.saveFile(file, subject);    	
+    	
     	return "redirect:/";
     }
     
-    @GetMapping("/downloadFile/{fileId}")
-	public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable long fileId){
-		Document doc = documentService.getFile(fileId).get();
-		return ResponseEntity.ok()
-				.contentType(MediaType.parseMediaType(doc.getType()))
-				.header(HttpHeaders.CONTENT_DISPOSITION,"attachment:filename=\""+doc.getDocname()+"\"")
-				.body(new ByteArrayResource(doc.getFile()));
-	}
+//    @GetMapping("/downloadFile/{fileId}")
+//	public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable long fileId){
+//		Document doc = documentService.getFile(fileId).get();
+//		return ResponseEntity.ok()
+//				.contentType(MediaType.parseMediaType(doc.getType()))
+//				.header(HttpHeaders.CONTENT_DISPOSITION,"attachment:filename=\""+doc.getDocname()+"\"")
+//				.body(new ByteArrayResource(doc.getFile()));				
+//	}
     
     @GetMapping("/deleteuser/{id}")
     public String deleteUser(@PathVariable("id") long id) {
@@ -143,6 +148,23 @@ public class AppController {
         documentRepository.delete(document);
         
         return "redirect:/";
+    }
+    
+    @GetMapping("/files/download/{fileName:.+}")
+    public ResponseEntity downloadFileFromLocal(@PathVariable String fileName) {
+    	String fileBasePath = "src/main/resources/static/files/";	
+    	Path path = Paths.get(fileBasePath + fileName);
+    	Resource resource = null;
+    	try {
+    		resource = new UrlResource(path.toUri());
+    	} catch (MalformedURLException e) {
+    		e.printStackTrace();
+    	}
+    	return ResponseEntity.ok()
+    			.contentType(MediaType.parseMediaType("application/pdf"))
+    			.header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + resource.getFilename() + "\"")
+    			.body(resource);
+    	
     }
 
 }

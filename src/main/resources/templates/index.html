@@ -86,7 +86,7 @@
       <a  class="subject-btn" href="#" th:text="*{subjectname}">Subject 2 <span class="fas fa-caret-down"></span></a>
           <ul class="subject-list">
             <li th:each="document : ${documents}" th:if="${document.subject}==${subject}">
-            	<a th:text="${document.docname}" onClick='document.getElementById("iframe").src=`${document.file}`;'>Material 2</a>
+            	<a th:text="${document.docname}" th:attr="onclick=|showPdf('${document.docname}')|">Material 2</a>
             	<span title="delete file"><a class="delbtn" onclick="delFunction()" th:href="@{/deletedocument/{id}(id=${document.id})}">X</a></span> 
             </li>
 							
@@ -126,7 +126,7 @@
 
 
 <script>
-$(document).ready(function(){
+$(document).ready(function(){	
   $(".newsubj").show();
 //toggle menu button
     $('.btn').click(function(){
@@ -209,6 +209,13 @@ $(document).ready(function(){
 var droppedFile = false;
 var $input    = $("form").find('input[type="file"]'),
     $label    = $("form").find('label');
+
+showPdf = function(pdf){
+	var pdf_location = "http://localhost:8180/files/download/"+pdf;
+	console.log(pdf_location);
+	document.getElementById("iframe").src = pdf_location;
+	 
+}
 
 showFiles = function(files) {
       $label.text(files[ 0 ].name);
