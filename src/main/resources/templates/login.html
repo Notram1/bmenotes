@@ -10,6 +10,7 @@
         <link rel="stylesheet" type='text/css' href="../css/login.css" media="screen, projection"/>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 		<script type="text/javascript" src="../js/sign.js"> </script>
 		
 
@@ -52,11 +53,11 @@
                     <form action="#" th:action="@{/adduser}" th:object="${user}" th:method="post" id="signup_id" >
                         <div>
                             <div>
-                                <input type="text" th:field="*{username}" class="textbox" id="username" placeholder="Name" required>
+                                <input type="text" th:field="*{username}" class="textbox" id="new_username" placeholder="Name" required>
                                 <!--<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span> -->
                             </div>
                             <div>
-                                <input type="password" th:field="*{password}" class="textbox" id="password" placeholder="••••••••••••" minlength="3" required>
+                                <input type="password" th:field="*{password}" class="textbox" id="new_password" placeholder="••••••••••••" minlength="3" required>
                                 <!--  <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>-->
                             </div>
                             <div>

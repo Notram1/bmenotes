@@ -24,6 +24,7 @@ public class Application {
 	      urepository.save(new User("admin", "$2a$10$Rae1HeucoaPRCBrzAvd00.0.oCOIjatIYwxRHYcbZlCn4bdq5wloy","admin@gmail.com", "ROLE_ADMIN"));
 	      // username: "johnny", password: "johnny123", Bcrypt encoded e.g.: https://www.browserling.com/tools/bcrypt
 	      urepository.save(new User("johnny","$2a$10$2OQigyx4Dib154B0qc/An.ZOm3SPUp7AoGbzKZ2F3EhM5yz5wwx9a","johnny@gmail.com", "ROLE_USER"));
+	      
 	    };
 	}
 	

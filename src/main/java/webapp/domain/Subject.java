@@ -27,7 +27,7 @@ public class Subject {
 	@JoinColumn(name = "uid")
 	private User user;
 	
-	@OneToMany(mappedBy="subject", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="subject", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private Set<Document> documents;
 	
 	public Subject() {

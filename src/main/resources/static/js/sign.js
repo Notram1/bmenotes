@@ -8,14 +8,13 @@ $(document).ready(function(){
     	$(".login").show();
     	$(".signup").hide();
   	});
-	 $("#signup_id").validate(
-	 );
-	$("#conf_password").keyup(isPasswordMatch);
+	$("#signup_id").validate();
+	//$("#conf_password").keyup(isPasswordMatch);
     
 });
 
 function isPasswordMatch() {
-    var password = $("#password").val();
+    var password = $("#new_password").val();
     var conf_password = $("#conf_password").val();
     var bt = document.getElementById('btSubmit');
 

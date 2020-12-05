@@ -21,11 +21,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	 @Override
     protected void configure(HttpSecurity http) throws Exception {
+		http.headers().frameOptions().sameOrigin();		
     	//http.csrf().disable().cors();
         http
             .authorizeRequests()
                 .antMatchers("/login","/adduser", "/js/**", "/css/**", "/images/**").permitAll()
-                .antMatchers("/home", "/addsubject").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/", "/home", "/addsubject","/upload/db/**", "/downloadFile/**","/files/download/**").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
