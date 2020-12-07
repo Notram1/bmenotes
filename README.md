@@ -1,5 +1,8 @@
 # BMEnotes
 
+![sign_in](/src/main/resources/static/images/sign_in.png)
+
+
 ## How to start application
 
 1. Start Mariadb server as follows:
@@ -7,3 +10,4 @@
 	- To start MariaDB: run bin/mysqld.exe --console
 2. Start HeidiSQL (to be able to see what is going on in your database)
 3. Start http://localhost:8180/home
+
