@@ -1,8 +1,5 @@
 # BMEnotes
 
-
-|   |   |
-| ------ | ------ |
 | ![sign_in](/src/main/resources/static/images/sign_in.png) | ![sign_up](/src/main/resources/static/images/sign_up.png) |
 | ![home](/src/main/resources/static/images/home.png) | ![iframe](/src/main/resources/static/images/iframe.png) |
 
@@ -31,7 +28,7 @@ Step by step tutorial:
 	- You can open/delete uploaded materials and add new ones
 6. To add new material use the drag&drop icon and follow the instructions
 
-For informations check out the footer
+For informations check out the footer.
 
 ## Further development 
 
