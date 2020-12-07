@@ -1,8 +1,11 @@
 # BMEnotes
 
-![sign_in](/src/main/resources/static/images/sign_in.png) <!-- .element height="50%" width="50%" -->
-![sign_up](/src/main/resources/static/images/sign_up.png)
-![home](/src/main/resources/static/images/home.png) ![iframe](/src/main/resources/static/images/iframe.png)
+
+|   |   |
+| ------ | ------ |
+| ![sign_in](/src/main/resources/static/images/sign_in.png) | ![sign_up](/src/main/resources/static/images/sign_up.png) |
+| ![home](/src/main/resources/static/images/home.png) | ![iframe](/src/main/resources/static/images/iframe.png) |
+
 ![egyed-kapcsolat](/src/main/resources/static/images/egyed-kapcsolat.png)
 
 
