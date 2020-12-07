@@ -175,6 +175,98 @@ public ResponseEntity downloadFileFromLocal(@PathVariable String fileName) {
 
 ### Frontend
 
+The frontend of the application is mostly based on the following programming languages: HTML, CSS, JS, jQuery. The design of the website was developed in line with the backend and database structure in order the create a clean, easy to use frontend.
+
+There are two main components of the frontend development:
+1. Login page
+2. Main page
+
+The Main page has a simple structure. In the initial version there are two buttons on the welcome side, one for opening the side menu and the other for user menu.
+In the center there is an iframe to display study materials and websites. It is hidden until any material on the navigation bar is focused.
+
+The structure of the side menu using lists.
+```
+<nav class="sidebar">
+  <div class="text"><span class="fas fa-bars"> </span>Menu</div>
+  <ul>		
+    <li th:each="subject : ${subjects}" th:object="${subject}">
+      <a  class="subject-btn" href="#" th:text="*{subjectname}">Subject 2 <span class="fas fa-caret-down"></span></a>
+          <ul class="subject-list">
+            <li th:each="document : ${documents}" th:if="${document.subject}==${subject}">
+            	<a th:text="${document.docname}" th:attr="onclick=|showPdf('${document.docname}')|">Material 2</a>
+            	<span title="delete file"><a class="delbtn" onclick="delFunction()" th:href="@{/deletedocument/{id}(id=${document.id})}">X</a></span> 
+            </li>			
+              <form class="dropzone" th:action="@{/upload/db/{id}(id=${subject.id})}" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" th:id="|file${subject.id}|" class="box_file">
+                <label class="labelforfile" th:for="|file${subject.id}|"><strong>Drop file here, or click to add</strong></label>
+                <div class ="form-btns">                                 
+                  <input type="submit" class="subm-btn" value="Upload">
+                  <input type="reset" class="subm-btn reset" value="Delete">
+                </div>
+              </form>
+            <li><a class="userbutton del" onclick="delFunction()" th:href="@{/deletesubject/{id}(id=${subject.id})}"> delete subject </a></li>
+          </ul>
+    </li>
+    <li>
+        <form class="" th:action="@{/addsubject}" th:object="${subject}" method="post">
+         <input type="text" th:name="subjectname" id="subjectname" class="textbox newsubj" placeholder="New subject" >
+         <input type="submit" class="plusbutton" value="+">
+         <button type="button" class="clIF">Close Material window</button>
+        </form>
+    </li>
+  </ul>
+</nav>
+```
+The most important part of the navigation bar is the file upload, for which drag and drop method was used. The jQuery code is written in the 'document.ready' function. It waits until the browser is completely loaded and then becomes active. Drag and drop events trigger addition or deletion of classes.
+```
+var droppedFile = false;
+var $input    = $("form").find('input[type="file"]'),
+    $label    = $("form").find('label');
+
+showPdf = function(pdf){
+	var pdf_location = "http://localhost:8180/files/download/"+pdf;
+	console.log(pdf_location);
+	document.getElementById("iframe").src = pdf_location;
+}
+showFiles = function(files) {
+      $label.text(files[ 0 ].name);
+      console.log(files[ 0 ].name);
+      console.log(files[0]);
+      $(".from-btns").addClass("submit-show");
+};
+
+$(document).on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+});
+
+$('.dropzone').on('dragover', function(){
+      $(this).addClass('dragover');
+      console.log("drag");
+   })
+   .on('dragleave', function(){
+      $(this).removeClass('dragover');
+      console.log("dragleave");
+   })
+   .on('drop', function(e) {
+	 $(this).removeClass('dragover');
+	 console.log("drop");
+     droppedFiles = e.originalEvent.dataTransfer.files;
+     showFiles( droppedFiles );
+     $(".form-btns").addClass("submit-show");
+  }).on('change', function(e){
+    var i = event.srcElement;
+    showFiles(i.files);
+    $(".form-btns").addClass("submit-show");
+  });
+$(".reset").click(function(){
+  $label.text("Drop file here, or click to add");
+  $(".form-btns").removeClass("submit-show");
+  $label.show();
+  $(form).reset();
+});
+```
+The css files contain all style elements of the Main page and the login pages.
 
 ## Further development 
 
