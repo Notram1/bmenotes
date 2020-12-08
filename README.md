@@ -181,6 +181,36 @@ There are two main components of the frontend development:
 1. Login page
 2. Main page
 
+The Login page has 2 main parts, the sign in and the sign up pages. The sign in page is the main side, but if someone has not got an account can easily navigate with a button to the sign up page. This is realised with a jQuery script. When signing up, there are some requirements, wchich you should keep in mind:
+```
+<form action="#" th:action="@{/adduser}" th:object="${user}" th:method="post" id="signup_id" >
+    <div>
+        <div>
+            <input type="text" th:field="*{username}" class="textbox" id="new_username" placeholder="Name" required>
+        </div>
+        <div>
+            <input type="password" th:field="*{password}" class="textbox" id="new_password" placeholder="••••••••••••" minlength="3" required>
+        </div>
+        <div>
+            <input type="password" name="conf_password" class="textbox" id="conf_password" placeholder="••••••••••••" 
+                                minlength="3" onChange="isPasswordMatch();" required>
+        </div>
+        <div id="divCheckPassword"></div>
+        <div>
+    		<input type="email" th:field="*{email}" class="textbox" id="email" placeholder="email@address.com" 
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" minlength="5" required>
+        </div>
+    </div>
+    <div>
+        <input type="checkbox" name="TandC" value="yes" id="check" class="checkbox" required>
+        <label>I read and agree to the <a href="#">Terms and Conditions</a></label>
+    </div>  
+    <div>
+        <input type="submit" class="button" value="Add User" id="btSubmit" disabled>
+    </div>    
+</form>
+```
+
 The Main page has a simple structure. In the initial version there are two buttons on the welcome side, one for opening the side menu and the other for user menu.
 In the center there is an iframe to display study materials and websites. It is hidden until any material on the navigation bar is focused.
 
